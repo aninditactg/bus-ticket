@@ -1,0 +1,60 @@
+/* Body Base Styles */
+body {
+    background: #f5f7fa;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+}
+
+/* Navbar Brand */
+.navbar-brand {
+    font-weight: bold;
+    color: yellow !important;
+}
+
+/* Button Hover */
+.btn-primary:hover {
+    background-color: #004c9e;
+}
+
+
+
+/* Footer Paragraphs */
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+footer p + p {
+    margin-top: 8px;
+}
+
+/* Seat Layout */
+.seat-layout {
+    display: flex;
+    flex-direction: column; /* rows vertically stacked */
+    align-items: center;    
+    gap: 10px;              
+    max-width: 400px;
+}
+.seat {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 0;
+    margin: 2px;
+    border-radius: 5px;
+    user-select: none;
+}
+
+.seat.empty {
+    background: transparent;
+    cursor: default;
+}
+.seat.selected {
+    background-color: #FF5722;
+}
+.seat.booked {
+    background-color: #9E9E9E;
+    cursor: not-allowed;
+}
