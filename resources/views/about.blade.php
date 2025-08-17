@@ -10,7 +10,7 @@
                     Book your seats anytime, anywhere with just a few clicks. <br>
                     Enjoy a seamless booking experience with real-time bus schedules and secure payments. <br>
                     Trusted by thousands of travelers every day. <br>
-                    Travel smart. Travel with BusBook.
+                    Travel smart, travel safe with BusBook.
                 </p>
             </footer>
          </div>
