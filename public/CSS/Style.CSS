@@ -58,3 +58,44 @@ footer p + p {
     background-color: #9E9E9E;
     cursor: not-allowed;
 }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 36px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.add-new-bus {
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    color: purple;
+    margin: 20px 0;
+    text-decoration: none;
+}
+
+table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+td {
+    font-size: 16px;
+}
