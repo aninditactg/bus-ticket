@@ -49,38 +49,15 @@
                             <input type="date" name="journey_date" class="form-control rounded-pill shadow-sm" required>
                         </div>
 
-                        {{-- Hidden field to store selected seats --}}
-                        <input type="hidden" name="selected_seats" id="selected_seats_input">
-
-                        {{-- Seat Layout --}}
-<div class="mb-3">
-    <label class="form-label">Select Seat</label>
-    <select name="selected_seat" id="selected_seat" class="form-control rounded-pill shadow-sm" required>
-        <option value="" disabled selected>Select a seat</option>
-        <option value="A1">A1</option>
-        <option value="A2">A2</option>
-        <option value="A3">A3</option>
-        <option value="A4">A4</option>
-        <option value="B1">B1</option>
-        <option value="B2">B2</option>
-        <option value="B3">B3</option>
-        <option value="B4">B4</option>
-        <option value="C1">C1</option>
-        <option value="C2">C2</option>
-        <option value="C3">C3</option>
-        <option value="C4">C4</option>
-        <option value="D1">D1</option>
-        <option value="D2">D2</option>
-        <option value="D3">D3</option>
-        <option value="D4">D4</option>
-    </select>
-</div>
+ 
 
                         <div class="text-center">
-                            <button class="btn btn-primary rounded-pill px-5 shadow" type="submit" id="book_submit_btn" disabled>
+                            <button class="btn btn-primary rounded-pill px-5 shadow" type="button"
+                                    onclick="window.location.href='/seat'">
                                 Book Now
                             </button>
                         </div>
+                        
                     </form>
 
                 </div>
@@ -92,15 +69,31 @@
 
 @section('styles')
 <style>
+    /* ===============================
+       Seat Styles
+    ============================== */
+    .seat-layout {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .seat-row {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
     .seat {
         border: 1px solid #ccc;
         padding: 10px;
-        margin: 5px;
+        width: 50px;
         text-align: center;
         cursor: pointer;
         border-radius: 6px;
         background: #f8f9fa;
-        min-width: 40px;
+        user-select: none;
     }
     .seat.selected {
         background-color: #28a745;
@@ -111,9 +104,29 @@
         color: white;
         cursor: not-allowed;
     }
-    .empty {
-        visibility: hidden;
+
+    /* ===============================
+       Seat Legend
+    ============================== */
+    .seat-legend {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin: 20px 0;
     }
+    .seat-legend div {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .legend-box {
+        width: 25px;
+        height: 25px;
+        border-radius: 5px;
+    }
+    .legend-box.available { background-color: #f8f9fa; border: 1px solid #ccc; }
+    .legend-box.selected  { background-color: #28a745; }
+    .legend-box.booked    { background-color: #dc3545; }
 </style>
 @endsection
 
@@ -121,7 +134,7 @@
 <script>
 document.querySelectorAll('.seat').forEach(seat => {
     seat.addEventListener('click', function() {
-        if (this.classList.contains('booked') || this.classList.contains('empty')) return;
+        if (this.classList.contains('booked')) return;
 
         this.classList.toggle('selected');
         updateSelectedSeats();
@@ -135,5 +148,3 @@ function updateSelectedSeats() {
 }
 </script>
 @endpush
-
-

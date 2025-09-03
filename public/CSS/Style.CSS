@@ -1,75 +1,89 @@
-/* Body Base Styles */
+/* ===============================
+   Body & Base Styles
+=============================== */
 body {
-    background: #f5f7fa;
-    font-family: 'Segoe UI', sans-serif;
+    background: #f5f7fa;         /* Light gray-blue background */
+    font-family: Arial, 'Segoe UI', sans-serif;
     color: #333;
-}
-
-/* Navbar Brand */
-.navbar-brand {
-    font-weight: bold;
-    color: yellow !important;
-}
-
-/* Button Hover */
-.btn-primary:hover {
-    background-color: #004c9e;
-}
-
-
-
-/* Footer Paragraphs */
-footer p {
-    margin: 0;
-    font-size: 14px;
-}
-
-footer p + p {
-    margin-top: 8px;
-}
-
-/* Seat Layout */
-.seat-layout {
-    display: flex;
-    flex-direction: column; /* rows vertically stacked */
-    align-items: center;    
-    gap: 10px;              
-    max-width: 400px;
-}
-.seat {
-    background-color: #4CAF50;
-    color: white;
-    text-align: center;
-    cursor: pointer;
-    padding: 10px 0;
-    margin: 2px;
-    border-radius: 5px;
-    user-select: none;
-}
-
-.seat.empty {
-    background: transparent;
-    cursor: default;
-}
-.seat.selected {
-    background-color: #FF5722;
-}
-.seat.booked {
-    background-color: #9E9E9E;
-    cursor: not-allowed;
-}
-body {
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
+/* ===============================
+   Headings
+=============================== */
 h1 {
     font-size: 36px;
     text-align: center;
     margin-top: 20px;
 }
 
+/* ===============================
+   Navbar
+=============================== */
+.navbar-brand {
+    font-weight: bold;
+    color: yellow !important;   /* Force yellow color for brand */
+}
+
+/* ===============================
+   Buttons
+=============================== */
+.btn-primary:hover {
+    background-color: #004c9e;  /* Darker blue on hover */
+}
+
+/* ===============================
+   Footer
+=============================== */
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+footer p + p {
+    margin-top: 8px;           /* Space between footer paragraphs */
+}
+
+/* ===============================
+   Seat Layout
+=============================== */
+.seat-layout {
+    display: flex;
+    flex-direction: column;    /* Stack rows vertically */
+    align-items: center;
+    gap: 10px;                 /* Space between rows */
+    max-width: 400px;
+}
+
+.seat {
+    background-color: #4CAF50; /* Green for available seat */
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 0;
+    margin: 2px;
+    border-radius: 5px;
+    user-select: none;         /* Prevent text selection */
+}
+
+.seat.empty {
+    background: transparent;    /* Empty spot */
+    cursor: default;
+}
+
+.seat.selected {
+    background-color: #FF5722;  /* Orange for selected seat */
+}
+
+.seat.booked {
+    background-color: #9E9E9E;  /* Gray for booked seat */
+    cursor: not-allowed;         /* Cannot click */
+}
+
+/* ===============================
+   Add New Bus Link
+=============================== */
 .add-new-bus {
     display: block;
     text-align: center;
@@ -79,16 +93,19 @@ h1 {
     text-decoration: none;
 }
 
+/* ===============================
+   Tables
+=============================== */
 table {
     width: 80%;
-    margin: 0 auto;
+    margin: 0 auto;           /* Center table */
     border-collapse: collapse;
 }
 
 th, td {
     padding: 10px;
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid black;  /* Table borders */
 }
 
 th {
