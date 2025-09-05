@@ -42,7 +42,7 @@
       <p>"Your journey, just a click away — BusBook."</p>
       <p>
         📞 +880-1234-567890 |
-        ✉️ anindita.ctg32@gmail.com |
+        ✉️ busbook.@gmail.com |
         📍 123 Andorkilla Road, Chittagong
       </p>
     </div>

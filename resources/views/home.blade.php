@@ -34,6 +34,57 @@
                 <td>9:00 AM</td>
                 <td><a href="/book" class="btn btn-success btn-sm">Book Now</a></td>
             </tr>
+            <tr>
+                <td>Hanif</td>
+                <td>Dhaka</td>
+                <td>Rajshahi</td>
+                <td>8:00 AM</td>
+                <td><a href="/book" class="btn btn-success btn-sm">Book Now</a></td>
+            </tr>
+            <tr>
+                <td>Saudia</td>
+                <td>Dhaka</td>
+                <td>Barisal</td>
+                <td>10:00 AM</td>
+                <td><a href="/book" class="btn btn-success btn-sm">Book Now</a></td>
+            </tr>
+            <tr>
+                <td>Volvo</td>
+                <td>Sylhet</td>
+                <td>Dhaka</td>
+                <td>6:00 AM</td>
+                <td><a href="/book" class="btn btn-success btn-sm">Book Now</a></td>
+            </tr>
+            <tdr>
+                <td>Sohag</td>
+                <td>Dhaka</td>
+                <td>Cox's Bazar</td>
+                <td>5:00 AM</td>
+                <td><a href="/book" class="btn btn-success btn-sm">Book Now</a></td>
+            </tr>
+            </tdr>
+                <td>BRTC</td>
+                <td>Dhaka</td>
+                <td>Rangamati</td>
+                <td>11:00 AM</td>
+                <td><a href="/book" class="btn btn-success btn-sm">Book Now</a></td>
+        </tr>
+            <tdr>
+                <td>ExpressLine</td>
+                <td>Dhaka</td>
+                <td>Comilla</td>
+                <td>4:00 PM</td>
+                <td><a href="/book" class="btn btn-success btn-sm">Book Now</a></td>
+            </tr>
+        </tr>
+        <tdr>
+                <td>S.Alam</td>
+                <td>Chittagong</td>
+                <td>Dhaka</td>
+                <td>3:00 PM</td>
+                <td><a href="/book" class="btn btn-success btn-sm">Book Now</a></td>
+            </tr>
+                
         </tbody>
     </table>
 @endsection

@@ -44,6 +44,5 @@ Route::get('/send-test-email', function () {
     return 'Email sent successfully!';
 });
 
-Route::get('/seat', function() {
-    return view('seatbooking');
-});
+// Seat Booking Page
+Route::get('/seat', fn() => view('seatbooking'))->name('seat');

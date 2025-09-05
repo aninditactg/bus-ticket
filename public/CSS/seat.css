@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background: #f4f4f4;
+    background: #e39e9e;
     padding: 20px;
   }
   
@@ -35,9 +35,9 @@ body {
   .seat-grid {
     display: grid;
     grid-template-columns: repeat(4, 70px);
-    gap: 15px;
+    gap: 40px;
     justify-content: center;
-    margin: 20px auto;
+    margin: 30px auto;
     max-width: 400px;
   }
   
