@@ -8,6 +8,15 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\BusController;
 
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+| These routes handle the main pages, authentication, and booking system.
+| Laravel Breeze provides login/register routes automatically.
+|--------------------------------------------------------------------------
+*/
+
 // Home Page
 Route::get('/', fn() => view('home'))->name('home');
 
@@ -18,19 +27,30 @@ Route::get('/about', fn() => view('about'))->name('about');
 Route::get('/contact', fn() => view('contact'))->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
-// Users
+// Booking Routes
+Route::get('/booking', [BookingController::class, 'index'])->name('booking');
+
+// These routes require authentication (user must be logged in)
+Route::middleware(['auth'])->group(function () {
+    // Show booking form for a specific bus
+    Route::get('/booking/{busId}', [BookingController::class, 'show'])->name('booking.show');
+
+    // Save booking into database
+    Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
+
+    // Show logged-in user's bookings
+    Route::get('/my-bookings', [BookingController::class, 'myBookings'])->name('booking.my');
+});
+
+// Users (Admin or Management Section)
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
 Route::post('/users', [UserController::class, 'store'])->name('users.store');
 
-// Booking
-Route::get('/book', fn() => view('booking'))->name('booking');
-Route::post('/book', [BookingController::class, 'store'])->name('booking.store');
-
 // Feedback
 Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
 
-// Buses
+// Buses (CRUD for bus information)
 Route::get('/buses', [BusController::class, 'index'])->name('buses.index');
 Route::get('/buses/create', [BusController::class, 'create'])->name('buses.create');
 Route::post('/buses', [BusController::class, 'store'])->name('buses.store');
@@ -44,5 +64,5 @@ Route::get('/send-test-email', function () {
     return 'Email sent successfully!';
 });
 
-// Seat Booking Page
+// Seat Selection Page (frontend view only)
 Route::get('/seat', fn() => view('seatbooking'))->name('seat');

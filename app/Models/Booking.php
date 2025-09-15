@@ -7,16 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Booking extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
-        'bus_id',        
-        'seat_number',   
-        'name',
-        'email',
-        'phone',
-        'from',
-        'to',
-        'journey_date',
+        'user_id', 'bus_name', 'from', 'to', 'seat_numbers',
+        'total_passengers', 'price', 'payment_status',
+        'departure_time', 'arrival_time'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
