@@ -1,0 +1,93 @@
+
+    /* ------------------------------
+   Hero Section (Full Screen Banner)
+------------------------------ */
+.hero {
+    background: url("/image/bus.png") center center /cover no-repeat fixed;
+    background-size : cover;
+    height: 100vh; /* full viewport height */
+    width: 100%;
+    margin: 0;           /* extra gap remove */
+    padding: 0;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* vertical center */
+    align-items: center;     /* horizontal center */
+    position: relative;
+}
+
+/* Overlay effect (optional, dark layer for better text visibility) */
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 100; left: 100;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.45); /* dim background image */
+    z-index: 1;
+}
+
+/* Hero text & button above overlay */
+.hero h1,
+.hero a {
+    position: relative;
+    z-index: 2;
+}
+
+/* ------------------------------
+   Bus Grid Layout
+------------------------------ */
+.bus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem 0;
+}
+
+/* ------------------------------
+   Bus Card
+------------------------------ */
+.bus-card {
+    height: 200px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bus-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+/* ------------------------------
+   Bus Image
+------------------------------ */
+.bus-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.bus-card:hover .bus-img {
+    transform: scale(1.08);
+}
+
+/* ------------------------------
+   Overlay Info Text
+------------------------------ */
+.bus-card .info {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    padding: 0.7rem 1rem;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+}

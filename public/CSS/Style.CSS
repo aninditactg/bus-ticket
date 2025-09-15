@@ -25,6 +25,11 @@ h1 {
     font-weight: bold;
     color: yellow !important;   /* Force yellow color for brand */
 }
+header, nav {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
 
 /* ===============================
    Buttons
