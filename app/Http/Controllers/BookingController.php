@@ -111,10 +111,43 @@ class BookingController extends Controller
     public function seatStore(Request $request)
     {
         // Example: Save the selected seat(s) into the database
-        // $request->seat -> will contain the seat number(s)
-        // Perform database save logic here
-         // Validate & store booking
+        return back()->with('success', 'Seat booked successfully!');
+    }
 
+    /**
+     * Show the seat layout page
+     */
+    public function showSeatLayout($busId = 1)
+    {
+        // Get all seats that are already booked for this bus
+        $bookedSeats = Booking::where('bus_id', $busId)
+                              ->pluck('seat_number')
+                              ->toArray();
+
+        // Send data to the seat layout view
+        return view('seatlayout', compact('bookedSeats', 'busId'));
+    }
+
+    /**
+     * Book a seat using POST
+     */
+    public function bookSeat(Request $request)
+    {
+        // Validate the selected seat(s)
+        $request->validate([
+            'seat_numbers'   => 'required|string', // Comma separated seats like "A1,B2"
+            'bus_id'         => 'required|integer',
+            'bus_name'       => 'required|string|max:255',
+            'from'           => 'required|string|max:255',
+            'to'             => 'required|string|max:255',
+            'journey_date'   => 'required|date',
+            'price'          => 'required|numeric',
+            'departure_time' => 'required|date',
+            'arrival_time'   => 'required|date',
+        ]);
+
+        // Simple example response
         return back()->with('success', 'Seat booked successfully!');
     }
 }
+    
