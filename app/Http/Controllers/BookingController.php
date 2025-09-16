@@ -54,14 +54,20 @@ class BookingController extends Controller
 
         $busId = $request->bus_id;
 
-        // Convert seat_numbers string into an array
-        $seats = array_filter(array_map('trim', explode(',', $request->seat_numbers)));
+        $selectedSeats = $request->input('seat', []);
 
-        // Check if any of these seats are already booked
-        $alreadyBooked = Booking::where('bus_id', $busId)
-                                ->whereIn('seat_number', $seats)
-                                ->pluck('seat_number')
-                                ->toArray();
+    if (empty($selectedSeats)) {
+        return back()->with('error', 'Please select at least one seat.');
+    }
+
+    foreach ($selectedSeats as $seat) {
+        \App\Models\Booking::create([
+            'seat_number' => $seat,
+            'user_id' => auth()->id() ?? null,
+        ]);
+    }
+
+    return redirect()->route('seat')->with('success', 'Seats booked successfully!');
 
         if (!empty($alreadyBooked)) {
             return back()->withErrors([
@@ -149,5 +155,6 @@ class BookingController extends Controller
         // Simple example response
         return back()->with('success', 'Seat booked successfully!');
     }
+    
 }
     

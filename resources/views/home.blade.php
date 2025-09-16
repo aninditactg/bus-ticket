@@ -13,7 +13,7 @@
             background: url('{{ asset('images/bus-banner.jpg') }}') center/cover no-repeat;
             color: white;
             text-align: center;
-            padding: 140px 15px;
+            padding: 10px 15px;
             position: relative;
         }
         .hero h1 { font-weight: 700; }
@@ -38,7 +38,6 @@
 
     <!-- Hero Section -->
 <section class="hero">
-    <h1 class="display-5">Get Your Ticket Online<br>Easy and Safely</h1>
 
     <!-- Image -->
     <div class="my-4">

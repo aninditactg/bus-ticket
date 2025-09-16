@@ -158,8 +158,8 @@
 
         </div>
 
-
         <button type="submit" class="btn">Book Now</button>
+
     </form>
 
 </body>

@@ -14,15 +14,12 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('bus_name');
+            $table->string('name');
+            $table->string('email')->nullable();
+            $table->string('phone', 30);
             $table->string('from');
             $table->string('to');
-            $table->string('seat_numbers'); 
-            $table->integer('total_passengers');
-            $table->decimal('price', 8, 2);
-            $table->string('payment_status')->default('pending');
-            $table->dateTime('departure_time');
-            $table->dateTime('arrival_time');
+            $table->date('journey_date');
             $table->timestamps();
     
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
