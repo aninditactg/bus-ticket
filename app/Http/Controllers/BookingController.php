@@ -9,7 +9,7 @@ use App\Models\Booking;
 class BookingController extends Controller
 {
     /**
-     * Default booking page
+     * Step 1: Show booking form
      */
     public function index()
     {
@@ -17,144 +17,103 @@ class BookingController extends Controller
     }
 
     /**
-     * Show the booking page with already booked seats
+     * Step 2: Save basic booking info (name, email, phone, route, date)
+     * and move to seat selection
      */
-    public function show($busId = 1)
+    public function storeBooking(Request $request)
     {
-        // Get all seats that are already booked for this bus
+        // Validate Step 1 form
+        $request->validate([
+            'name'        => 'required|string|max:255',
+            'email'       => 'nullable|email',
+            'phone'       => 'required|string|max:30',
+            'from'        => 'required|string|max:255',
+            'to'          => 'required|string|max:255',
+            'journey_date'=> 'required|date',
+        ]);
+
+        // Store booking info temporarily in session
+        session([
+            'booking' => $request->only(['name', 'email', 'phone', 'from', 'to', 'journey_date'])
+        ]);
+
+        return redirect()->route('seat.layout'); // Go to seat selection page
+    }
+
+    /**
+     * Step 3: Show seat layout with already booked seats
+     */
+    public function showSeatLayout($busId = 1)
+    {
+        // Get already booked seats for this bus
         $bookedSeats = Booking::where('bus_id', $busId)
                               ->pluck('seat_number')
                               ->toArray();
 
-        // Send data to the booking view
-        return view('booking', compact('bookedSeats', 'busId'));
+        return view('seatlayout', compact('bookedSeats', 'busId'));
     }
 
     /**
-     * Handle booking form submission
+     * Step 4: Handle seat booking
      */
     public function store(Request $request)
     {
-        // Validate all booking form inputs
+        // Validate seat selection
         $request->validate([
-            'name'             => 'required|string|max:255',
-            'email'            => 'nullable|email',
-            'phone'            => 'required|string|max:30',
-            'from'             => 'required|string|max:255',
-            'to'               => 'required|string|max:255',
-            'bus_id'           => 'required|integer',
-            'bus_name'         => 'required|string|max:255',
-            'seat_numbers'     => 'required|string',   // Comma separated seats like "A1,B2"
-            'total_passengers' => 'required|integer|min:1',
-            'journey_date'     => 'required|date',
-            'price'            => 'required|numeric',
-            'departure_time'   => 'required|date',
-            'arrival_time'     => 'required|date',
+            'bus_id'       => 'required|integer',
+            'bus_name'     => 'required|string|max:255',
+            'seat_numbers' => 'required|array', // Expect an array: ['A1', 'B2']
+            'price'        => 'required|numeric',
+            'departure_time' => 'required|string',
+            'arrival_time'   => 'required|string',
         ]);
 
-        $busId = $request->bus_id;
+        // Retrieve Step 1 info from session
+        $bookingData = session('booking');
 
-        $selectedSeats = $request->input('seat', []);
-
-    if (empty($selectedSeats)) {
-        return back()->with('error', 'Please select at least one seat.');
-    }
-
-    foreach ($selectedSeats as $seat) {
-        \App\Models\Booking::create([
-            'seat_number' => $seat,
-            'user_id' => auth()->id() ?? null,
-        ]);
-    }
-
-    return redirect()->route('seat')->with('success', 'Seats booked successfully!');
-
-        if (!empty($alreadyBooked)) {
-            return back()->withErrors([
-                'msg' => 'These seats are already booked: ' . implode(', ', $alreadyBooked)
-            ])->withInput();
+        if (!$bookingData) {
+            return redirect()->route('booking.index')
+                             ->with('error', 'Please fill passenger info first.');
         }
 
-        // Save each seat as a separate booking record
-        foreach ($seats as $seat) {
+        // Save each seat as a booking record
+        foreach ($request->seat_numbers as $seat) {
             Booking::create([
-                'user_id'          => Auth::id(),   // logged-in user ID
-                'bus_id'           => $busId,
-                'bus_name'         => $request->bus_name,
-                'seat_number'      => $seat,        // store single seat
-                'seat_numbers'     => json_encode($seats), // store all selected seats as JSON
-                'total_passengers' => $request->total_passengers,
-                'name'             => $request->name,
-                'email'            => $request->email,
-                'phone'            => $request->phone,
-                'from'             => $request->from,
-                'to'               => $request->to,
-                'journey_date'     => $request->journey_date,
-                'price'            => $request->price,
-                'payment_status'   => 'pending',   // default status
-                'departure_time'   => $request->departure_time,
-                'arrival_time'     => $request->arrival_time,
+                'user_id'        => Auth::id(),
+                'bus_id'         => $request->bus_id,
+                'bus_name'       => $request->bus_name,
+                'seat_number'    => $seat,
+                'name'           => $bookingData['name'],
+                'email'          => $bookingData['email'],
+                'phone'          => $bookingData['phone'],
+                'from'           => $bookingData['from'],
+                'to'             => $bookingData['to'],
+                'journey_date'   => $bookingData['journey_date'],
+                'price'          => $request->price,
+                'payment_status' => 'pending',
+                'departure_time' => $request->departure_time,
+                'arrival_time'   => $request->arrival_time,
             ]);
         }
 
-        // Redirect back to booking page with success message
-        return redirect()->route('booking.show', $busId)
+        // Clear session booking data
+        session()->forget('booking');
+
+        return redirect()->route('booking.index')
                          ->with('success', 'Seats booked successfully!');
     }
 
     /**
-     * Show bookings of the currently logged-in user
+     * Show current user's bookings
      */
     public function myBookings()
     {
         $bookings = Booking::where('user_id', Auth::id())->get();
         return view('booking.my', compact('bookings'));
     }
-
-    /**
-     * Handle seat selection form submission
-     */
-    public function seatStore(Request $request)
-    {
-        // Example: Save the selected seat(s) into the database
-        return back()->with('success', 'Seat booked successfully!');
-    }
-
-    /**
-     * Show the seat layout page
-     */
-    public function showSeatLayout($busId = 1)
-    {
-        // Get all seats that are already booked for this bus
-        $bookedSeats = Booking::where('bus_id', $busId)
-                              ->pluck('seat_number')
-                              ->toArray();
-
-        // Send data to the seat layout view
-        return view('seatlayout', compact('bookedSeats', 'busId'));
-    }
-
-    /**
-     * Book a seat using POST
-     */
-    public function bookSeat(Request $request)
-    {
-        // Validate the selected seat(s)
-        $request->validate([
-            'seat_numbers'   => 'required|string', // Comma separated seats like "A1,B2"
-            'bus_id'         => 'required|integer',
-            'bus_name'       => 'required|string|max:255',
-            'from'           => 'required|string|max:255',
-            'to'             => 'required|string|max:255',
-            'journey_date'   => 'required|date',
-            'price'          => 'required|numeric',
-            'departure_time' => 'required|date',
-            'arrival_time'   => 'required|date',
-        ]);
-
-        // Simple example response
-        return back()->with('success', 'Seat booked successfully!');
-    }
-    
 }
-    
+return view('confirmation', [
+    'booking' => $booking,
+    'seats'   => $selectedSeats,
+]);
+

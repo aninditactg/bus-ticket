@@ -15,7 +15,11 @@
         <span class="box booked"></span> Booked
     </div>
 
-    <form action="#" method="post">
+    <form action="{{ route('seat.store') }}" method="POST">
+        @csrf
+        
+    </form>
+    
         <div class="seat-grid">
             <!-- Row A -->
             <label class="seat">

@@ -7,6 +7,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\BusController;
+use App\Http\Controllers\SeatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,7 +66,7 @@ Route::get('/send-test-email', function () {
 });
 
 // Seat Selection Page (frontend view only)
-Route::get('/seat', fn() => view('seatbooking'))->name('seat');
+Route::get('/seat', fn() => view('seatlayout'))->name('seat');
 Route::get('/book', [BookingController::class, 'index']);
 
 //For showing the seat page (seat layout)
@@ -74,9 +75,16 @@ Route::post('/seat', [BookingController::class, 'seatStore'])->name('seat.store'
 // Note: Authentication routes (login, register, etc.) are handled by Laravel Breeze in routes/auth.php
 
 // For booking a seat using POST
- //Route::post('/book-seat', [BookingController::class, 'bookSeat'])->name('book.seat');
+ Route::post('/book-seat', [BookingController::class, 'bookSeat'])->name('book.seat');
 
 Route::post('/book-seats', [BookingController::class, 'store'])->name('book.seats');
+Route::post('/seats/book', [SeatController::class, 'store'])->name('seat.store');
+Route::get('/confirmation', fn() => view('confirmation'))->name('confirmation');
+Route::get('/seats', [SeatController::class, 'index'])->name('seat.layout');
+Route::post('/seats', [SeatController::class, 'store'])->name('seat.store');
+// Note: Authentication routes (login, register, etc.) are handled by Laravel Breeze in routes/auth.php
+
+
 
 
 
