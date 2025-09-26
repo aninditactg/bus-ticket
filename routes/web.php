@@ -59,7 +59,7 @@ Route::post('/buses', [BusController::class, 'store'])->name('buses.store');
 // Test Email Route
 Route::get('/send-test-email', function () {
     Mail::raw('This is a test email from Laravel.', function ($message) {
-        $message->to('your-other-email@example.com')
+        $message->to('anindita.ctg32@gmail.com')
                 ->subject('Test Email');
     });
     return 'Email sent successfully!';
