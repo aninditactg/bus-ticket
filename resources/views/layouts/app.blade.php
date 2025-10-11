@@ -1,59 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Bus Ticket Booking</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
-</head>
-<body>
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container">
-      <a class="navbar-brand" href="/">BusBook</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
+    <body class="font-sans antialiased">
+        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+            @include('layouts.navigation')
 
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="/book">Booking</a></li>
-          <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+            <!-- Page Heading -->
+            @isset($header)
+                <header class="bg-white dark:bg-gray-800 shadow">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
+            @endisset
 
-  <!-- Page Content -->
-  <div class="container mt-4">
-    @yield('content')
-  </div>
+            <!-- Page Content -->
+            <main>
+                @hasSection('content')
+                    @yield('content')
+                @else
+                    {{ $slot ?? '' }}
+                @endif
+            </main>
 
-  <!-- Footer -->
-  <footer class="bg-dark text-white text-center py-4 mt-5">
-    <div class="container">
-      <p>"Your journey, just a click away — BusBook."</p>
-      <p>
-        📞 +880-1234-567890 |
-        ✉️ busbook.@gmail.com |
-        📍 123 Andorkilla Road, Chittagong
-      </p>
-    </div>
-  </footer>
-
-  <footer class="bg-dark text-white text-center py-3 mt-3">
-    <p>2025 BusBook. All rights reserved.</p>
-  </footer>
-
-  <!-- Bootstrap JS Bundle -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
+            
+        </div>
+    </body>
 </html>

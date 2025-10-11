@@ -76,7 +76,7 @@
                     <td>Dhaka</td>
                     <td>Chittagong</td>
                     <td>7:00 AM</td>
-                    <td><a href="{{ route('booking') }}" class="btn btn-success btn-sm">Book Now</a></td>
+                    <td><a href="{{ route('booking') }}?bus_id=1" class="btn btn-success btn-sm">Book Now</a></td>
                 </tr>
                 <tr>
                     <td>Shyamoli</td>
@@ -84,7 +84,7 @@
                     <td>Dhaka</td>
                     <td>Khulna</td>
                     <td>9:00 AM</td>
-                    <td><a href="{{ route('booking') }}" class="btn btn-success btn-sm">Book Now</a></td>
+                    <td><a href="{{ route('booking') }}?bus_id=2" class="btn btn-success btn-sm">Book Now</a></td>
                 </tr>
                 <tr>
                     <td>Hanif</td>
@@ -92,7 +92,7 @@
                     <td>Dhaka</td>
                     <td>Rajshahi</td>
                     <td>8:00 AM</td>
-                    <td><a href="{{ route('booking') }}" class="btn btn-success btn-sm">Book Now</a></td>
+                    <td><a href="{{ route('booking') }}?bus_id=3" class="btn btn-success btn-sm">Book Now</a></td>
                 </tr>
                 <tr>
                     <td>Saudia</td>
@@ -100,7 +100,7 @@
                     <td>Dhaka</td>
                     <td>Barisal</td>
                     <td>10:00 AM</td>
-                    <td><a href="{{ route('booking') }}" class="btn btn-success btn-sm">Book Now</a></td>
+                    <td><a href="{{ route('booking') }}?bus_id=4" class="btn btn-success btn-sm">Book Now</a></td>
                 </tr>
                 <tr>
                     <td>Volvo</td>
@@ -108,7 +108,7 @@
                     <td>Sylhet</td>
                     <td>Dhaka</td>
                     <td>6:00 AM</td>
-                    <td><a href="{{ route('booking') }}" class="btn btn-success btn-sm">Book Now</a></td>
+                    <td><a href="{{ route('booking') }}?bus_id=5" class="btn btn-success btn-sm">Book Now</a></td>
                 </tr>
                 <tr>
                     <td>Sohag</td>
@@ -116,7 +116,7 @@
                     <td>Dhaka</td>
                     <td>Cox's Bazar</td>
                     <td>5:00 AM</td>
-                    <td><a href="{{ route('booking') }}" class="btn btn-success btn-sm">Book Now</a></td>
+                    <td><a href="{{ route('booking') }}?bus_id=6" class="btn btn-success btn-sm">Book Now</a></td>
                 </tr>
                 <tr>
                     <td>BRTC</td>
@@ -124,7 +124,7 @@
                     <td>Dhaka</td>
                     <td>Rangamati</td>
                     <td>11:00 AM</td>
-                    <td><a href="{{ route('booking') }}" class="btn btn-success btn-sm">Book Now</a></td>
+                    <td><a href="{{ route('booking') }}?bus_id=7" class="btn btn-success btn-sm">Book Now</a></td>
                 </tr>
                 <tr>
                     <td>ExpressLine</td>
@@ -132,7 +132,7 @@
                     <td>Dhaka</td>
                     <td>Comilla</td>
                     <td>4:00 PM</td>
-                    <td><a href="{{ route('booking') }}" class="btn btn-success btn-sm">Book Now</a></td>
+                    <td><a href="{{ route('booking') }}?bus_id=8" class="btn btn-success btn-sm">Book Now</a></td>
                 </tr>
                 <tr>
                     <td>S.Alam</td>
@@ -140,7 +140,7 @@
                     <td>Chittagong</td>
                     <td>Dhaka</td>
                     <td>3:00 PM</td>
-                    <td><a href="{{ route('booking') }}" class="btn btn-success btn-sm">Book Now</a></td>
+                    <td><a href="{{ route('booking') }}?bus_id=9" class="btn btn-success btn-sm">Book Now</a></td>
                 </tr>
             </tbody>
         </table>

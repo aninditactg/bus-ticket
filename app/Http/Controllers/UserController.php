@@ -8,9 +8,15 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        $users = User::all();
+        return view('index', compact('users'));
+    }
+
     public function create()
     {
-        return view('users.create');
+        return view('create');
     }
 
     public function store(Request $request)

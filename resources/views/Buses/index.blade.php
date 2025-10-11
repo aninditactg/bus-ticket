@@ -12,6 +12,7 @@
 <th>Bus Name</th>
 <th>Type</th>
 <th>Total Seats</th>
+<th>Action</th>
 </tr>
 @foreach($buses as $bus)
 <tr>
@@ -20,6 +21,9 @@
 <td>{{ $bus->bus_name }}</td>
 <td>{{ $bus->type }}</td>
 <td>{{ $bus->total_seat }}</td>
+<td>
+    <a href="{{ route('seat.layout', ['busId' => $bus->id]) }}" class="btn btn-success">Select</a>
+</td>
 </tr>
 @endforeach
 </table>
