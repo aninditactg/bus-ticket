@@ -93,3 +93,5 @@ Route::post('/seats', [SeatController::class, 'store'])->name('seat.store');
 
 
 
+
+
