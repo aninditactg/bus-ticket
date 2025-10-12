@@ -1,8 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.public')
+
+@section('title', 'Contact')
 
 @section('content')
 <div class="container mt-5">
-    <h2>Contact Us</h2>
+    <h1>Contact Us</h1>
     <p>We’d love to hear from you! Fill out the form below and we’ll get back to you as soon as possible.</p>
 
     {{-- Feedback messages --}}

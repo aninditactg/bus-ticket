@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Booking;
+use App\Models\Bus;
 
 class BookingController extends Controller
 {
@@ -13,7 +14,25 @@ class BookingController extends Controller
      */
     public function index()
     {
-        return view('booking'); // resources/views/booking.blade.php
+        $buses = \App\Models\Bus::all();
+        $selectedBus = null;
+
+        $busName = request('bus_name');
+        if ($busName) {
+            $selectedBus = (object) [
+                'id' => null,
+                'name' => $busName,
+                'price' => request('price', 500),
+                'from' => request('from', 'Dhaka'),
+                'to' => request('to', 'Chittagong'),
+                'departure_time' => request('departure_time', '10:00 AM'),
+                'arrival_time' => request('arrival_time', '2:00 PM'),
+            ];
+        } elseif (request('bus_id')) {
+            $selectedBus = \App\Models\Bus::find(request('bus_id'));
+        }
+
+        return view('booking', compact('buses', 'selectedBus')); // resources/views/booking.blade.php
     }
 
     /**
@@ -50,7 +69,17 @@ class BookingController extends Controller
                               ->pluck('seat_number')
                               ->toArray();
 
-        return view('seatlayout', compact('bookedSeats', 'busId'));
+        // For virtual buses or demo, add some booked seats
+        if ($busId == 0 || empty($bookedSeats)) {
+            $bookedSeats = ['A1', 'A2', 'B3']; // Demo booked seats as in screenshot
+        }
+
+        if (!$bus) {
+            return redirect()->route('booking')
+                             ->with('error', 'No buses available. Please create a bus first.');
+        }
+
+        return view('booking.seatlayout', compact('bookedSeats', 'busId', 'bus'));
     }
 
     /**
@@ -72,7 +101,7 @@ class BookingController extends Controller
         $bookingData = session('booking');
 
         if (!$bookingData) {
-            return redirect()->route('booking.index')
+            return redirect()->route('booking')
                              ->with('error', 'Please fill passenger info first.');
         }
 
