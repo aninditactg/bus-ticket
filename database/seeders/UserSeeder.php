@@ -19,30 +19,43 @@ class UserSeeder extends Seeder
                 'email' => 'anindita46@gmail.com', // Changed email to avoid duplicate
                 'phone' => '01712345678',
                 'password' => Hash::make('password123'),
+                'role' => 'user',
             ],
             [
                 'name' => 'Nima',
                 'email' => 'nima123@gmail.com', // Fixed missing @ symbol
                 'phone' => '01711112222',
                 'password' => Hash::make('password123'),
+                'role' => 'user',
             ],
             [
                 'name' => 'Nasrin',
                 'email' => 'nasrin673@gmail.com',
                 'phone' => '01733334444',
                 'password' => Hash::make('password123'),
+                'role' => 'user',
             ],
             [
                 'name' => 'Eva',
                 'email' => 'eva525@gmail.com',
                 'phone' => '01755556666',
                 'password' => Hash::make('password123'),
+                'role' => 'user',
             ],
             [
                 'name' => 'Rahi',
                 'email' => 'rahi90@gmail.com',
                 'phone' => '01777778888',
                 'password' => Hash::make('password123'),
+                'role' => 'user',
+            ],
+            [
+                'name' => 'Admin',
+                'email' => 'admin@example.com',
+                'phone' => '01700000000',
+                'password' => Hash::make('admin123'),
+                'role' => 'admin',
+                'email_verified_at' => now(),
             ],
         ];
 

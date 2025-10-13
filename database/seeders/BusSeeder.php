@@ -115,7 +115,10 @@ class BusSeeder extends Seeder
         ];
 
         foreach ($buses as $busData) {
-            Bus::create($busData);
+            Bus::firstOrCreate(
+                ['bus_number' => $busData['bus_number']], // Check if bus_number exists
+                $busData // Create with all data if bus_number doesn't exist
+            );
         }
     }
 }
